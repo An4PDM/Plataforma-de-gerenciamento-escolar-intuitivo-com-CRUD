@@ -17,21 +17,27 @@ CREATE TABLE professor (
     sexo ENUM ('f','m','o'),
     data_nascimento DATE
 );
+
 DROP TABLE professor;
 CREATE TABLE curso (
 	id_c INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45) UNIQUE,
     carga_horaria FLOAT
 );
+ALTER TABLE curso RENAME TO materia;
+ALTER TABLE materia RENAME COLUMN id_c TO id_m;
+SELECT * FROM materia;
+
 CREATE TABLE nota (
 	id_n INT PRIMARY KEY AUTO_INCREMENT,
     ra INT,
-    id_c INT,
+    id_m INT,
     nota DECIMAL(10,2),
     FOREIGN KEY (ra) REFERENCES aluno(ra),
-    FOREIGN KEY (id_c) REFERENCES curso (id_c)
+    FOREIGN KEY (id_m) REFERENCES materia (id_m)
 );
 DROP TABLE nota;
+SELECT * FROM nota;
 -- Inserção de dados
 INSERT INTO aluno (nome, sobrenome, sexo, data_nascimento) 
 VALUES ('Noah','Silveira','m','1999-10-28'),
@@ -40,3 +46,5 @@ VALUES ('Noah','Silveira','m','1999-10-28'),
 ('José','Cunha','m','1998-04-20'),
 ('Maria','Nascimento','f','2000-09-30');
 SELECT * FROM aluno;
+
+SELECT * FROM professor;
