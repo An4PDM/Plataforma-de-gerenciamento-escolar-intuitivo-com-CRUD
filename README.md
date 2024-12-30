@@ -15,13 +15,13 @@
 **Pré-requisitos**
 <p> Instale o Python (versão 3.7 ou superior).</p>
 <p> Instale o MySQL e crie um banco de dados para o sistema. </p>
-<p> Instale a biblioteca de conexão MySQL: </p>
 
+**Executando o sistema**
+<p> Instale a biblioteca de conexão MySQL: </p>
 
 ```
 pip install mysql-connector-python
 ```
-<p> Executando o Sistema </p>
 <p> Clone o repositório: </p>
 
 ```
