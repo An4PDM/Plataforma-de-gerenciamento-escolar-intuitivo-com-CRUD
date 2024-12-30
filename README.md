@@ -1,4 +1,4 @@
-# Sistema-de-cadastro-escolar
+# Sistema de Gerenciamento Escolar com CRUD
 <p> Este projeto é um sistema de cadastro escolar simples desenvolvido em Python, com integração ao banco de dados MySQL. Ele permite o gerenciamento eficiente dos dados de alunos, como matrícula, nome e curso, diretamente através de comandos no código Python. </p>
 
 ## Tecnologias Utilizadas
