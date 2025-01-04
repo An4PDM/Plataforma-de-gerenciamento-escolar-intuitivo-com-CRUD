@@ -2,8 +2,8 @@ import mysql.connector
 # Conexão com o banco de dados
 bd = mysql.connector.connect(
     host = 'localhost',
-    user = 'root',
-    password = '16092005Dn!',
+    user = 'usuario',
+    password = 'senha_exemplo',
     database = 'sistema_academico'
 )
 cursor = bd.cursor()
