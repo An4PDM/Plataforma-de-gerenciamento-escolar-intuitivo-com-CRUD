@@ -43,7 +43,7 @@ git clone https://github.com/An4PDM/Plataforma-de-gerenciamento-escolar-intuitiv
 3. Navegue até o diretório do projeto:
 
 ```
-cd Sistema-de-cadastro-escolar-com-CRUD
+cd Plataforma-de-gerenciamento-escolar-intuitivo-com-CRUD
 ```
 
 4. Configure as credenciais de acesso ao MySQL. No arquivo sis_acad.py, edite a parte do código que contém as informações do banco de dados (host, user, password, database) para refletir as suas configurações.
