@@ -1,4 +1,6 @@
 import mysql.connector
+import PySimpleGUI as sg
+
 # Conexão com o banco de dados
 bd = mysql.connector.connect(
     host = 'localhost',
@@ -8,71 +10,20 @@ bd = mysql.connector.connect(
 )
 cursor = bd.cursor()
 
-# Registo de alunos
-def registro_aluno (n,s,sx,d):
-    query = '''INSERT INTO aluno (nome, sobrenome, sexo, data_nascimento)
-                            VALUES (%s,%s,%s,%s);'''
-    cursor.execute(query,(n,s,sx,d))
-    bd.commit()
-    print('Aluno registrado com sucesso.')
-
-# Registro de professores
-def registro_professor (n,s,sx,d):
-    query = '''INSERT INTO professor (nome, sobrenome, sexo, data_nascimento)
-                            VALUES (%s,%s,%s,%s);'''
-    cursor.execute(query,(n,s,sx,d))
-    bd.commit()
-    print('Professor registrado com sucesso.')
-
-# Registro de materias
-def registro_materia (n,c):
-    query = '''INSERT INTO materia (nome,carga_horaria)
-                            VALUES (%s,%s);'''
-    cursor.execute(query,(n,c))
-    bd.commit()
-    print('Materia registrada com sucesso.')
-
-# Registro de notas
-def registro_nota (ra,id_c,n):
-    query = '''INSERT INTO nota (ra,id_c,nota)
-                            VALUES (%s,%s,%s)'''
-    cursor.execute(query,(ra,id_c,n))
-    bd.commit()
-    print('Nota registrada com sucesso!')
-
-
-# Opção de registrar, apagar ou atualizar dados
-escolha = int(input('''Digite 1, caso queira gerenciar os dados de alunos; 
-Digite 2, caso queira gerenciar os dados de professores;
-Digite 3, caso queira gerenciar os dados de materias;
-Digite 4, caso queira gerenciar as notas: '''))
-
-# Gerenciamento de alunos
-if escolha == 1:
-    acao = int(input('''1: Para inserir aluno; 
-2: Para deletar aluno; 
-3: Para atualizar dados do aluno;
-4: Para exibir os dados de todos os alunos: '''))
-    
-
-    ra = int(input('ra: '))
-    n =input('Nome: ')
-    s = input('Sobrenome: ')
-    sx = input('Sexo (f,m,o): ')
-    d = input('Data de nascimento: ')
-
+# Gerenciamento de dados de alunos
+def gerenciar_aluno(acao, ra, n, s, sx, d):
     if acao == 1:
         query = '''INSERT INTO aluno 
                             VALUES (%s,%s,%s,%s,%s);'''
         cursor.execute(query,(ra,n,s,sx,d))
         bd.commit()
-        print('Aluno registrado com sucesso.')
+        return 'Aluno registrado com sucesso.'
 
     elif acao == 2:
         query = '''DELETE FROM aluno WHERE ra = %s;'''
         cursor.execute(query,(ra,))
         bd.commit()
-        print('Aluno deletado com sucesso.')
+        return 'Aluno deletado com sucesso.'
 
     elif acao == 3:
         query = '''UPDATE aluno SET nome = %s,
@@ -82,41 +33,31 @@ if escolha == 1:
                                     WHERE ra = %s;'''
         cursor.execute(query,(n,s,sx,d,ra))
         bd.commit()
-        print('Dados atualizados com sucesso.')
+        return 'Dados atualizados com sucesso.'
 
     elif acao == 4:
         query = '''SELECT * FROM aluno;'''
         cursor.execute(query)
         result = cursor.fetchall()
+        result_str = ''
         for x in result:
-            print(x)
+            result_str += f'{x}\n'
+        return result_str
 
 # Gerenciamento de professores            
-if escolha == 2:
-    acao = int(input('''1: Para inserir professor; 
-2: Para deletar professor; 
-3: Para atualizar dados do professor;
-4: Para exibir os dados de todos os professores: '''))
-
-    id = int(input('id: '))
-    cpf =input('cpf: ')
-    n =input('Nome: ')
-    s = input('Sobrenome: ')
-    sx = input('Sexo (f,m,o): ')
-    d = input('Data de nascimento: ')
-
+def gerenciar_professores (acao, id, cpf, n, s, sx, d):
     if acao == 1:
         query = '''INSERT INTO professor 
                             VALUES (%s,%s,%s,%s,%s,%s);'''
         cursor.execute(query,(id,cpf,n,s,sx,d))
         bd.commit()
-        print('Professor registrado com sucesso.')
+        return 'Professor registrado com sucesso.'
 
     elif acao == 2:
         query = '''DELETE FROM professor WHERE id_p = %s;'''
         cursor.execute(query,(id,))
         bd.commit()
-        print('Professor deletado com sucesso.')
+        return 'Professor deletado com sucesso.'
 
     elif acao == 3:
         query = '''UPDATE professor SET cpf = %s,
@@ -127,40 +68,31 @@ if escolha == 2:
                                     WHERE id_p = %s;'''
         cursor.execute(query,(cpf,n,s,sx,d,id))
         bd.commit()
-        print('Dados atualizados com sucesso.')
+        return 'Dados atualizados com sucesso.'
 
     elif acao == 4:
         query = '''SELECT * FROM professor;'''
         cursor.execute(query)
         result = cursor.fetchall()
+        result_str = ''
         for x in result:
-            print(x)
+            result_str += f'{x}\n'
+        return result_str
 
 # Gerenciamento de materias
-if escolha == 3:
-    acao = int(input('''1: Para inserir uma matéria; 
-2: Para deletar matéria; 
-3: Para atualizar dados da matéria;
-4: Para exibir os dados de todos as matérias: '''))
-    
-
-    id = int(input('id: '))
-    n =input('Nome: ')
-    c = input('Carga horária: ')
-
-
+def gerenciar_materias(acao, id, n, c):
     if acao == 1:
         query = '''INSERT INTO materia 
                             VALUES (%s,%s,%s);'''
         cursor.execute(query,(id,n,c))
         bd.commit()
-        print('Matéria registrada com sucesso.')
+        return 'Matéria registrada com sucesso.'
 
     elif acao == 2:
         query = '''DELETE FROM materia WHERE id_m = %s;'''
         cursor.execute(query,(id,))
         bd.commit()
-        print('Matéria deletada com sucesso.')
+        return 'Matéria deletada com sucesso.'
 
     elif acao == 3:
         query = '''UPDATE materia SET nome = %s,
@@ -168,40 +100,31 @@ if escolha == 3:
                                     WHERE id_m = %s;'''
         cursor.execute(query,(n,c,id))
         bd.commit()
-        print('Dados atualizados com sucesso.')
+        return 'Dados atualizados com sucesso.'
 
     elif acao == 4:
         query = '''SELECT * FROM materia;'''
         cursor.execute(query)
         result = cursor.fetchall()
+        result_str = ''
         for x in result:
-            print(x)
+            result_str += f'{x}\n'
+        return result_str
 
 # Gerenciamento de notas
-if escolha == 4:
-    acao = int(input('''1: Para inserir uma nota; 
-2: Para deletar nota; 
-3: Para atualizar a nota;
-4: Para exibir as notas do aluno: '''))
-    
-    id = input('ID para a nota: ')
-    ra =input('ra do aluno: ')
-    id_materia = input('ID da matéria: ')
-    n = input('Nota: ')
-
-
+def gerenciar_notas(acao, id, ra, id_materia, n):  
     if acao == 1:
         query = '''INSERT INTO nota 
                             VALUES (%s,%s,%s,%s);'''
         cursor.execute(query,(id,ra,id_materia,n))
         bd.commit()
-        print('Nota registrada com sucesso.')
+        return 'Nota registrada com sucesso.'
 
     elif acao == 2:
         query = '''DELETE FROM nota WHERE id_n = %s;'''
         cursor.execute(query,(id,))
         bd.commit()
-        print('Nota deletada com sucesso.')
+        return 'Nota deletada com sucesso.'
 
     elif acao == 3:
         query = '''UPDATE nota SET ra = %s,
@@ -210,7 +133,7 @@ if escolha == 4:
                                     WHERE id_n = %s;'''
         cursor.execute(query,(ra,id_materia,n,id))
         bd.commit()
-        print('Dados atualizados com sucesso.')
+        return 'Dados atualizados com sucesso.'
 
     elif acao == 4:
         query = '''SELECT a.nome AS 'Aluno', m.nome AS 'Matéria', n.nota 
@@ -219,6 +142,89 @@ if escolha == 4:
                                     INNER JOIN materia m ON m.id_m = n.id_m;'''
         cursor.execute(query)
         result = cursor.fetchall()
+        result_str = ''
         for x in result:
-            print(x)
+            result_str += f'{x}\n'
+        return result_str
 
+    # Calculo da média por materia
+    elif acao == 5:
+        ra = input('Insira o ra do aluno: ')
+        query = '''SELECT m.nome AS Materia, round(AVG(n.nota),1) AS 'Média'
+                                    FROM nota n 
+                                    INNER JOIN aluno a ON a.ra = n.ra
+                                    INNER JOIN materia m ON m.id_m = n.id_m
+                                    WHERE a.ra = %s
+                                    GROUP BY m.nome;'''
+        cursor.execute(query,(ra,))
+        result = cursor.fetchall()
+        result_str = ''
+        for x in result:
+            result_str += f'{x}\n'
+        return result_str
+
+# Criação do layout
+layout = [
+    [sg.Text('Escolha uma opção:')],
+    [sg.Combo(['Gerenciar alunos','Gerenciar professores','Gerenciar matérias','Gerenciar notas'],key='-MENU-',readonly=True)],
+
+    [sg.Text('RA ou ID (se aplicável): '), sg.Input(key='-RA-ID-')],
+    [sg.Text('Nome: '), sg.Input(key='-NOME-')],
+    [sg.Text('Sobrenome: '), sg.Input(key='-SOBRENOME-')],
+    [sg.Text('CPF (apenas para professor): '), sg.Input(key='-CPF-')],
+    [sg.Text('Sexo: (f/m/o)'), sg.Combo(['f','m','o'],key='-SEXO-')],
+    [sg.Text('Data de Nacimento: '), sg.Input(key='-DATA-')],
+    [sg.Text('ID da Matéria (se aplicável): '), sg.Input(key='-ID-MATERIA-')],
+    [sg.Text('Carga Horária (se aplicável): '), sg.Input(key='-CARGA-')],
+    [sg.Text('Nota (se aplicável): '),sg.Input(key='-NOTA-')],
+    
+
+    [sg.Text('Ação:')],
+    [sg.Combo(['1 - Inserir','2 - Deletar','3 - Atualizar','4 - Exibir','5 - Exibir médias'], key='-ACAO-',readonly=True)],
+
+    [sg.Button('Executar'), sg.Button('Sair')],
+
+    [sg.Text('Resultado:',size=(40,1))],
+    [sg.Multiline('',size=(50,10),key='-RESULT-')]
+]
+
+# Criação da janela
+window = sg.Window('Sistema Acadêmico', layout)
+
+# Interações do user
+while True:
+    event,values = window.read() # Espera por interações
+
+    if event == sg.WINDOW_CLOSED or event == 'Sair': #Saida do sistema
+        break
+
+    # Obtenção dos dados
+    acao = int(values['-ACAO-'][0]) if values['-ACAO-'] else 0
+    menu = values['-MENU-']
+    id = values['-RA-ID-']
+    n = values['-NOME-']
+    s = values['-SOBRENOME-']
+    cpf = values['-CPF-']
+    sx = values['-SEXO-']
+    d = values['-DATA-']
+    id_materia = values['-ID-MATERIA-']
+    c = values['-CARGA-']
+    nota = values['-NOTA-']
+
+    # Seleção da função correspondente ao menu
+    if 'Gerenciar alunos' in menu:
+        result = gerenciar_aluno(acao,id,n,s,sx,d)
+    
+    elif 'Gerenciar professores' in menu:
+        result = gerenciar_professores(acao,id,cpf,n,s,sx,d)
+
+    elif 'Gerenciar matérias' in menu:
+        result = gerenciar_materias(acao,id,n,c)
+
+    elif 'Gerenciar notas' in menu:
+        result = gerenciar_notas(acao,id,id,id_materia,nota)
+
+    # Exibição dos resultados
+    window['-RESULT-'].update(result)
+
+window.close()
