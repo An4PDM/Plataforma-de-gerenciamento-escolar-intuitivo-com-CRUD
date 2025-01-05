@@ -37,7 +37,7 @@ pip install PySimpleGUI
 2. Clone o repositório: 
 
 ```
-git clone https://github.com/An4PDM/Sistema-de-cadastro-escolar-com-CRUD.git
+git clone https://github.com/An4PDM/Plataforma-de-gerenciamento-escolar-intuitivo-com-CRUD.git
 ```
 
 3. Navegue até o diretório do projeto:
