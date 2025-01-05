@@ -1,10 +1,10 @@
 # Sistema de Gerenciamento Escolar com CRUD
-<p> Este projeto é um sistema de cadastro escolar simples desenvolvido em Python, com integração ao banco de dados MySQL. Ele permite o gerenciamento eficiente dos dados de alunos, como matrícula, nome e curso, diretamente através de comandos no código Python. </p>
+<p> Este projeto é um sistema de cadastro escolar desenvolvido em Python, com integração ao banco de dados MySQL e uma interface gráfica simples. Ele permite o gerenciamento eficiente dos dados escolares diretamente através da interface criada em código Python. </p>
 
 ## Tecnologias Utilizadas
 <p> Back-end: Python </p>
 <p> Banco de Dados: MySQL. </p>
-<p> Bibliotecas: mysql-connector-python </p>
+<p> Bibliotecas: mysql-connector-python, PySimpleGUI </p>
 
 ## Funcionalidades
 <p> Gerenciamento de registros de alunos (inserção, atualização, exclusão). </p>
@@ -17,21 +17,22 @@
 <p> Instale o MySQL e crie um banco de dados para o sistema. </p>
 
 **Executando o sistema**
-<p> Instale a biblioteca de conexão MySQL: </p>
+<p> Instale a biblioteca de conexão MySQL e a biblioteca de GUI: </p>
 
 ```
 pip install mysql-connector-python
+pip install PySimpleGUI
 ```
 <p> Clone o repositório: </p>
 
 ```
-git clone https://github.com/An4PDM/Sistema-de-cadastro-escolar.git
+git clone https://github.com/An4PDM/Sistema-de-cadastro-escolar-com-CRUD.git
 ```
 
 <p> Navegue até o diretório do projeto:</p>
 
 ```
-cd Sistema-de-cadastro-escolar
+cd Sistema-de-cadastro-escolar-com-CRUD
 ```
 
 <p> Configure as credenciais de acesso ao MySQL no arquivo de configuração. </p>
@@ -39,7 +40,7 @@ cd Sistema-de-cadastro-escolar
 <p> Execute o script principal para interagir com o banco de dados: </p>
 
 ```
-python app.py
+python sis_acad.py
 ```
 
 ## Como Contribuir
