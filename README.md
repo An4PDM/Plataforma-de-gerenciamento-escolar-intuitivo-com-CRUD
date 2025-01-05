@@ -1,4 +1,4 @@
-# Sistema de Gerenciamento Escolar com CRUD
+# Plataforma de Gerenciamento Escolar intuitivo com CRUD
 
 Este projeto é um sistema de gerenciamento escolar desenvolvido em Python, com integração ao banco de dados MySQL e uma interface gráfica simples, utilizando a biblioteca PySimpleGUI. O sistema permite realizar operações de **CRUD** (Criar, Ler, Atualizar, Deletar) para gerenciar registros de alunos, professores, matérias e notas diretamente através da interface.
 
