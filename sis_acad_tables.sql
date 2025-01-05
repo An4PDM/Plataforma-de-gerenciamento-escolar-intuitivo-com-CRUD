@@ -3,7 +3,7 @@ USE sistema_academico;
 SHOW TABLES;
 
 CREATE TABLE aluno (
-	ra INT PRIMARY KEY AUTO_INCREMENT,
+    ra INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45),
     sobrenome VARCHAR(45),
     sexo ENUM ('f','m','o'),
@@ -11,7 +11,7 @@ CREATE TABLE aluno (
 );
 
 CREATE TABLE professor (
-	id_p INT PRIMARY KEY AUTO_INCREMENT,
+    id_p INT PRIMARY KEY AUTO_INCREMENT,
     cpf CHAR(11) UNIQUE,
     nome VARCHAR(45),
     sobrenome VARCHAR(45),
@@ -19,9 +19,8 @@ CREATE TABLE professor (
     data_nascimento DATE
 );
 
-DROP TABLE professor;
 CREATE TABLE curso (
-	id_c INT PRIMARY KEY AUTO_INCREMENT,
+    id_c INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45) UNIQUE,
     carga_horaria FLOAT
 );
@@ -30,7 +29,7 @@ ALTER TABLE curso RENAME TO materia;
 ALTER TABLE materia RENAME COLUMN id_c TO id_m;
 
 CREATE TABLE nota (
-	id_n INT PRIMARY KEY AUTO_INCREMENT,
+    id_n INT PRIMARY KEY AUTO_INCREMENT,
     ra INT,
     id_m INT,
     nota DECIMAL(10,2),
