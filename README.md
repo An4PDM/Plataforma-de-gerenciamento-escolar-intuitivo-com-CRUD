@@ -2,6 +2,7 @@
 
 Este projeto é um sistema de gerenciamento escolar desenvolvido em Python, com integração ao banco de dados MySQL e uma interface gráfica simples, utilizando a biblioteca PySimpleGUI. O sistema permite realizar operações de **CRUD** (Criar, Ler, Atualizar, Deletar) para gerenciar registros de alunos, professores, matérias e notas diretamente através da interface.
 
+
 ## Tecnologias Utilizadas
 
 - **Front-end e Back-end:** Python (versão 3.7 ou superior)
@@ -17,6 +18,9 @@ Este projeto é um sistema de gerenciamento escolar desenvolvido em Python, com 
 - **Gerenciamento de matérias:** Cadastro e atualização de matérias oferecidas pela instituição.
 - **Gerenciamento de notas:** Registro, alteração e consulta de notas dos alunos.
 - **Interface gráfica:** Interface simples para interação com o banco de dados sem necessidade de linha de comando.
+
+  
+![User Interface](img/gui_sis.png)
 
 ## Como Rodar o Projeto
 
